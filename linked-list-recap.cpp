@@ -29,6 +29,7 @@ int searchByValueUnique(Node *&head, int key);
 void searchByValueDuplicate(Node *&head, int key);
 Test searchByValueDuplicateReturn(Node *&head, int key);
 void insertAfterSpecificValueUnique(Node *&head, int searchValue, int value);
+void deletionAtHead(Node *&head);
 
 void insertAtTail(Node *&head, int val)
 {
@@ -185,6 +186,20 @@ void insertAfterSpecificValueUnique(Node *&head, int searchValue, int value)
     insertAtSpecificPosition(head, position + 1, value);
 }
 
+void deletionAtHead(Node *&head)
+{
+    Node *temp = head;
+    if (temp != NULL)
+    {
+        head = temp->Next;
+        delete temp;
+    }
+    else
+    {
+        cout << "There is no value in the Linked List" << endl;
+    }
+}
+
 int main()
 {
     Node *head = NULL;
@@ -195,6 +210,7 @@ int main()
          << "Choice 4: Search a value (Unique List)" << endl
          << "Choice 5: Search a value (Duplication Enabled List)" << endl
          << "Choice 6: Insertion after a specific value (Unique List)" << endl
+         << "Choice 7: Deletion at Head" << endl
          << "Choice 0: Exit" << endl
          << endl;
     cout << "Next Choice: ";
@@ -264,6 +280,9 @@ int main()
             cout << "Enter the value to insert: ";
             cin >> value;
             insertAfterSpecificValueUnique(head, searchValue, value);
+            break;
+        case 7:
+            deletionAtHead(head);
             break;
         default:
             break;
