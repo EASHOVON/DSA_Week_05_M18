@@ -28,6 +28,7 @@ void insertAtSpecificPosition(Node *&head, int pos, int value);
 int searchByValueUnique(Node *&head, int key);
 void searchByValueDuplicate(Node *&head, int key);
 Test searchByValueDuplicateReturn(Node *&head, int key);
+void insertAfterSpecificValueUnique(Node *&head, int searchValue, int value);
 
 void insertAtTail(Node *&head, int val)
 {
@@ -114,6 +115,7 @@ int searchByValueUnique(Node *&head, int key)
         temp = temp->Next;
         count++;
     }
+    return count;
 }
 
 void searchByValueDuplicate(Node *&head, int key)
@@ -173,6 +175,16 @@ Test searchByValueDuplicateReturn(Node *&head, int key)
     return T;
 }
 
+void insertAfterSpecificValueUnique(Node *&head, int searchValue, int value)
+{
+    // Step 1: Search the position of the search value
+    int position;
+    position = searchByValueUnique(head, searchValue);
+
+    // Step 2: Insert the value of the position+1
+    insertAtSpecificPosition(head, position + 1, value);
+}
+
 int main()
 {
     Node *head = NULL;
@@ -182,6 +194,7 @@ int main()
          << "Choice 3: Insertion at specific position" << endl
          << "Choice 4: Search a value (Unique List)" << endl
          << "Choice 5: Search a value (Duplication Enabled List)" << endl
+         << "Choice 6: Insertion after a specific value (Unique List)" << endl
          << "Choice 0: Exit" << endl
          << endl;
     cout << "Next Choice: ";
@@ -243,6 +256,14 @@ int main()
                 }
                 cout << endl;
             }
+            break;
+        case 6:
+            cout << "Enter the value to search: ";
+            int searchValue;
+            cin >> searchValue;
+            cout << "Enter the value to insert: ";
+            cin >> value;
+            insertAfterSpecificValueUnique(head, searchValue, value);
             break;
         default:
             break;
