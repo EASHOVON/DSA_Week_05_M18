@@ -31,6 +31,7 @@ Test searchByValueDuplicateReturn(Node *&head, int key);
 void insertAfterSpecificValueUnique(Node *&head, int searchValue, int value);
 void deletionAtHead(Node *&head);
 void deletionAtTail(Node *&head);
+void deletionAtSpecificPosition(Node *&head, int pos);
 
 void insertAtTail(Node *&head, int val)
 {
@@ -223,6 +224,20 @@ void deletionAtTail(Node *&head)
     }
 }
 
+void deletionAtSpecificPosition(Node *&head, int pos)
+{
+    Node *temp = head;
+    int i = 1;
+    while (i < pos - 1)
+    {
+        temp = temp->Next;
+        i++;
+    }
+    Node *delNode = temp->Next;
+    temp->Next = delNode->Next;
+    delete delNode;
+}
+
 int main()
 {
     Node *head = NULL;
@@ -235,6 +250,7 @@ int main()
          << "Choice 6: Insertion after a specific value (Unique List)" << endl
          << "Choice 7: Deletion at Head" << endl
          << "Choice 8: Deletion at Tail" << endl
+         << "Choice 9: Deletion at Specific Position" << endl
          << "Choice 0: Exit" << endl
          << endl;
     cout << "Next Choice: ";
@@ -310,6 +326,13 @@ int main()
             break;
         case 8:
             deletionAtTail(head);
+            break;
+        case 9:
+            cout << "Enter the Desired Position: ";
+            cin >> position;
+            deletionAtSpecificPosition(head, position);
+            cout << endl;
+            display(head);
             break;
         default:
             break;
