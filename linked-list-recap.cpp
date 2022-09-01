@@ -226,16 +226,34 @@ void deletionAtTail(Node *&head)
 
 void deletionAtSpecificPosition(Node *&head, int pos)
 {
-    Node *temp = head;
-    int i = 1;
-    while (i < pos - 1)
+    if (pos <= countLength(head))
     {
-        temp = temp->Next;
-        i++;
+        if (pos == 1)
+        {
+            deletionAtHead(head);
+        }
+        else if (pos == countLength(head))
+        {
+            deletionAtTail(head);
+        }
+        else
+        {
+            Node *temp = head;
+            int i = 1;
+            while (i < pos - 1)
+            {
+                temp = temp->Next;
+                i++;
+            }
+            Node *delNode = temp->Next;
+            temp->Next = delNode->Next;
+            delete delNode;
+        }
     }
-    Node *delNode = temp->Next;
-    temp->Next = delNode->Next;
-    delete delNode;
+    else
+    {
+        cout << "Position Out of Bound" << endl;
+    }
 }
 
 int main()
@@ -328,6 +346,11 @@ int main()
             deletionAtTail(head);
             break;
         case 9:
+            if (head == NULL)
+            {
+                cout << "There is no value in the Linked List" << endl;
+                break;
+            }
             cout << "Enter the Desired Position: ";
             cin >> position;
             deletionAtSpecificPosition(head, position);
